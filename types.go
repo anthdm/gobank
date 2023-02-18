@@ -4,6 +4,7 @@ import (
 	"math/rand"
 	"time"
 
+	jwt "github.com/golang-jwt/jwt/v4"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -55,4 +56,9 @@ func NewAccount(firstName, lastName, password string) (*Account, error) {
 		Number:            int64(rand.Intn(1000000)),
 		CreatedAt:         time.Now().UTC(),
 	}, nil
+}
+
+type JWTClaims struct {
+	UserID int `json:"userid"`
+	jwt.RegisteredClaims
 }
